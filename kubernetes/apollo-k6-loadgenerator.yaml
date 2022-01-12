@@ -35,13 +35,18 @@ spec:
         image: loadimpact/k6:latest
         command: ["k6"]
         args: ["run", "/scripts/fiber-http-varload.js"]
+        env:
+        - name: K6_NO_SUMMARY
+          value: "TRUE"
+        - name: K6_NO_THRESHOLDS
+          value: "TRUE"
         resources:
-          requests:
-            cpu: "1"
-            memory: 1G
           limits:
-            cpu: "4"
-            memory: 8G
+            cpu: "2"
+            memory: 2Gi
+          requests:
+            cpu: "0.5"
+            memory: 0.5Gi
         volumeMounts:
         - name: k6-scripts-volume
           mountPath: /scripts
