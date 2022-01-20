@@ -107,7 +107,7 @@ data:
           startRate: 50,
 
           // Anchor iterations to 10 second durations (see default function below)
-          timeUnit: '10s',
+          timeUnit: '3s',
 
           // Allocate enough VUs to support the entire test or the executor throttles
           preAllocatedVUs: 700,
@@ -155,10 +155,10 @@ data:
       const before = new Date().getTime();
       while (true) {
         // issue a single synchronous request
-        // http.get(url);
+        http.get(url);
 
         // alternately, issue a batch of parallel requests
-        http.batch(requests);
+        // http.batch(requests);
 
         // break out once the duration expires
         const after = new Date().getTime();

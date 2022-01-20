@@ -16,6 +16,7 @@ spec:
       comp: apollo
   template:
     metadata:
+      annotations: {}
       labels:
         comp: apollo
     spec:

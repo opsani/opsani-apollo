@@ -6,7 +6,7 @@ The Apollo demo optimization application
 
 ```sh
 kubectl create ns apollo
-kubectl apply -f kubernetes/ -n apollo
+kubectl kustomize envoy/ | kubectl apply -f - -n apollo
 ```
 
 Then configure the opsani-manifest with:
@@ -34,5 +34,4 @@ kubectl delete ns apollo
 Apollo is a simple application that executes an md5 hash function to generate some
 actual CPU work against at the compute level.
 
-K6 is the loadgenerator that makes requests against the apollo application. Currently
-it is configured for static load.
+K6 is the loadgenerator that makes requests against the apollo application. Currently it is configured for static load.
