@@ -9,6 +9,15 @@ kubectl create ns apollo
 kubectl kustomize envoy/ | kubectl apply -f - -n apollo
 ```
 
+## Istio metrics
+
+```sh
+# istioctl install ## if Istio isn't already installed
+kubectl create ns apollo
+kubectl label namespace apollo istio-injection=enabled --overwrite
+kubectl kustomize base/ | kubectl apply -f - -n apollo
+```
+
 Then configure the opsani-manifest with:
 
 ```sh
