@@ -19,7 +19,8 @@ spec:
     metadata:
       annotations: {}
       labels:
-        comp: apollo
+        app.kubernetes.io/name: apollo
+        app.kubernetes.io/component: apollo
     spec:
       containers:
       - name: apollo
