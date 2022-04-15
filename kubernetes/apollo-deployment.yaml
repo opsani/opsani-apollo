@@ -14,7 +14,8 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      comp: apollo
+      app.kubernetes.io/name: apollo
+      app.kubernetes.io/component: apollo
   template:
     metadata:
       annotations: {}
@@ -46,7 +47,8 @@ metadata:
 
 spec:
   selector:
-    comp: apollo
+    app.kubernetes.io/name: apollo
+    app.kubernetes.io/component: apollo
   ports:
   - protocol: TCP
     port: 8080
