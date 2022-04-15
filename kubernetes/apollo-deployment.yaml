@@ -6,7 +6,8 @@ kind: Deployment
 metadata:
   name: apollo
   labels:
-    comp: apollo
+    app.kubernetes.io/name: apollo
+    app.kubernetes.io/component: apollo
 
 spec:
   replicas: 3
