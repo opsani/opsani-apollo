@@ -6,6 +6,7 @@ kind: Deployment
 metadata:
   name: apollo
   labels:
+    app: apollo
     app.kubernetes.io/name: apollo
     app.kubernetes.io/component: apollo
 
@@ -14,12 +15,14 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
+      app: apollo
       app.kubernetes.io/name: apollo
       app.kubernetes.io/component: apollo
   template:
     metadata:
       annotations: {}
       labels:
+        app: apollo
         app.kubernetes.io/name: apollo
         app.kubernetes.io/component: apollo
     spec:
@@ -47,6 +50,7 @@ metadata:
 
 spec:
   selector:
+    app: apollo
     app.kubernetes.io/name: apollo
     app.kubernetes.io/component: apollo
   ports:
