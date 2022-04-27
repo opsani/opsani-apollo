@@ -13,6 +13,8 @@ metadata:
 spec:
   replicas: 3
   revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: apollo
