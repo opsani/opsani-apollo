@@ -1,8 +1,6 @@
 ---
-
 apiVersion: apps/v1
-kind: Deployment
-
+kind: StatefulSet
 metadata:
   name: apollo
   labels:
@@ -12,6 +10,7 @@ metadata:
 
 spec:
   replicas: 3
+  serviceName: apollo
   revisionHistoryLimit: 2
   selector:
     matchLabels:
