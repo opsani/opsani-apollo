@@ -25,16 +25,17 @@ spec:
         app.kubernetes.io/name: apollo
         app.kubernetes.io/component: apollo
     spec:
+      terminationGracePeriodSeconds: 10
       containers:
       - name: apollo
         image: opsani/co-http:latest
         args: [ 'busy=10' ]
         resources:
           limits:
-            cpu: 1000m
+            cpu: 500m
             memory: 1Gi
           requests:
-            cpu: 1000m
+            cpu: 500m
             memory: 1Gi
         ports:
           - containerPort: 8080
