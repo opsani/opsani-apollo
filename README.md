@@ -9,7 +9,7 @@ kubectl create ns apollo
 kubectl kustomize envoy/ | kubectl apply -f - -n apollo
 ```
 
-## Istio metrics
+## (Optional) Istio metrics
 
 ```sh
 # istioctl install ## if Istio isn't already installed
@@ -17,6 +17,8 @@ kubectl create ns apollo
 kubectl label namespace apollo istio-injection=enabled --overwrite
 kubectl kustomize kubernetes/ | kubectl apply -f - -n apollo
 ```
+
+## Opsani Manifests Configuration
 
 Then configure the opsani-manifest with:
 
@@ -29,7 +31,7 @@ SERVICE = apollo
 
 And then to start optimization with opsani-dev:
 ```sh
-kubectl apply -f opsani-manifest.yaml -n apollo
+kubectl apply -f servo_install/opsani-manifests.yaml -n apollo
 ```
 
 ## Cleanup

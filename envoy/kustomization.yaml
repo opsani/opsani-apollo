@@ -6,7 +6,7 @@ patches:
 - path: envoy-patch.yaml
   target:
     group: apps
-    kind: Deployment
+    kind: StatefulSet
     name: apollo
     version: v1
 
