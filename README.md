@@ -2,20 +2,30 @@
 
 The Apollo demo optimization application
 
-## Simple deployment
+## Configure Metrics source
+
+Select one of the following (mutually exclusive) configurations to provide metrics
+to the Prometheus sidecar of ServoX
+
+### Istio metrics (Required for Dashbase)
 
 ```sh
-kubectl create ns apollo
-kubectl kustomize envoy/ | kubectl apply -f - -n apollo
-```
-
-## (Optional) Istio metrics
-
-```sh
+# brew install istioctl ## if istioctl isn't already installed
 # istioctl install ## if Istio isn't already installed
 kubectl create ns apollo
 kubectl label namespace apollo istio-injection=enabled --overwrite
 kubectl kustomize kubernetes/ | kubectl apply -f - -n apollo
+```
+
+Once Istio is installed, any prometheus server configured to scrape pods should
+automatically scrape Istio generated metrics as well due to the default configuration
+of [metrics merging](https://istio.io/latest/docs/ops/integrations/prometheus/#option-1-metrics-merging)
+
+### Envoy sidecar metrics (Legacy solution, used in non-Istio environments)
+
+```sh
+kubectl create ns apollo
+kubectl kustomize envoy/ | kubectl apply -f - -n apollo
 ```
 
 ## Opsani Manifests Configuration
@@ -38,6 +48,7 @@ kubectl apply -f servo_install/opsani-manifests.yaml -n apollo
 
 ```sh
 kubectl delete ns apollo
+# kubectl delete ns istio-system ## if istio was installed, it will prevent nodes from draining which will block teardown of temporary test clusters
 ```
 
 ## Description
