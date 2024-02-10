@@ -35,7 +35,7 @@ spec:
                 - servo
       containers:
       - name: k6
-        image: loadimpact/k6:latest
+        image: grafana/k6:latest
         command: ["k6"]
         args: ["run", "/scripts/fiber-http-varload.js"]
         env:
