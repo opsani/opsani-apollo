@@ -1,0 +1,69 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: apollo
+  labels:
+    app: apollo
+    app.kubernetes.io/name: apollo
+    app.kubernetes.io/component: apollo
+
+spec:
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: apollo
+      app.kubernetes.io/name: apollo
+      app.kubernetes.io/component: apollo
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: apollo
+        app.kubernetes.io/name: apollo
+        app.kubernetes.io/component: apollo
+    spec:
+      containers:
+      - name: co-http
+        image: ghcr.io/opsani/co-http:0.7.0-otel
+        args: [ 'busy=100' ]
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        ports:
+          - containerPort: 8080
+        env:
+          - name: OTEL_SERVICE_NAME
+            value: "apollo24"
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: "appdynamics-otel-collector-service.appdynamics.svc.cluster.local:4318"
+          - name: OTEL_EXPORTER_OTLP_INSECURE
+            value: "true"
+          - name: OTEL_TRACES_EXPORTER
+            value: "otlp,logging" 
+
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: apollo
+
+spec:
+  selector:
+    app: apollo
+    app.kubernetes.io/name: apollo
+    app.kubernetes.io/component: apollo
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
